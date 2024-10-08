@@ -16,7 +16,6 @@ void AMyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	
 }
 
 //**DISABLED** Called every frame
