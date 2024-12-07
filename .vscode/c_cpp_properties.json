@@ -17,10 +17,5 @@
             "compileCommands": "D:\\Documents\\GitHub\\ProceduralAnimation\\.vscode\\compileCommands_Default.json"
         }
     ],
-    "version": 4,
-    "includePath": [ 
-     "${workspaceFolder}\\Intermediate\\**", 
-     "${workspaceFolder}\\Plugins\\**", 
-     "${workspaceFolder}\\Source\\**" 
-    ]
+    "version": 4
 }
