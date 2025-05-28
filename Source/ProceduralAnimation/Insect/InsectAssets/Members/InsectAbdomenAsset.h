@@ -17,8 +17,7 @@ class PROCEDURALANIMATION_API UInsectAbdomenAsset : public UInsectMemberAsset
 public:
 
 	UPROPERTY(EditAnywhere)
-	float Height;
-
+	FTransform Transform;
 
 	UPROPERTY(EditAnywhere)
 	FTransform ThoraxSocket;

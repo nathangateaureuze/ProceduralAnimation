@@ -25,145 +25,55 @@ class PROCEDURALANIMATION_API AInsectCharacter : public ACharacter
 
 public:
 
-	AInsectCharacter();
+	AInsectCharacter(const FObjectInitializer& ObjectInitializer);
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Insect")
-	TObjectPtr <UControlRigComponent> ControlRig;
-
-private:
-
+	UPROPERTY(Instanced, EditAnywhere, Category = "Insect")
+	TObjectPtr<UControlRigComponent> ControlRig;
 
 	/*	------
 	*	ASSETS
 	*	------	*/
-
 	UPROPERTY(EditAnywhere, Category = "Insect|Asset|Color")
-	UInsectColorAsset* Color1;
+	TObjectPtr<UInsectColorAsset> Color1;
 	UPROPERTY(EditAnywhere, Category = "Insect|Asset|Color")
-	UInsectColorAsset* Color2;
+	TObjectPtr<UInsectColorAsset> Color2;
 
 	UPROPERTY(EditAnywhere, Category = "Insect|Asset|Member")
-	UInsectAbdomenAsset* Abdomen;
+	TObjectPtr<UInsectAbdomenAsset> Abdomen;
 	UPROPERTY(EditAnywhere, Category = "Insect|Asset|Member")
-	UInsectAntennaeAsset* Antennae;
-	UPROPERTY(EditAnywhere, Category = "Insect|Asset|Asset|Member")
-	UInsectHeadAsset* Head;
+	TObjectPtr<UInsectAntennaeAsset> Antennae;
 	UPROPERTY(EditAnywhere, Category = "Insect|Asset|Member")
-	UInsectLegAsset* Leg;
+	TObjectPtr<UInsectHeadAsset> Head;
 	UPROPERTY(EditAnywhere, Category = "Insect|Asset|Member")
-	UInsectThoraxAsset* Thorax;
-
+	TObjectPtr<UInsectLegAsset> Leg;
+	UPROPERTY(EditAnywhere, Category = "Insect|Asset|Member")
+	TObjectPtr<UInsectThoraxAsset> Thorax;
 	// END of ASSETS
 
 
 	/*	-------------------
 	*	STATIC MESH MEMBERS
 	*	-------------------	*/
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Insect", meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere)
 	TObjectPtr <UStaticMeshComponent> SM_Abdomen;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Insect", meta = (AllowPrivateAccess = "true"))
-	UStaticMeshComponent* SM_Thorax;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Insect", meta = (AllowPrivateAccess = "true"))
-	UStaticMeshComponent* SM_Head;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Insect", meta = (AllowPrivateAccess = "true"))
-	UStaticMeshComponent* SM_Antennae_L;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Insect", meta = (AllowPrivateAccess = "true"))
-	UStaticMeshComponent* SM_Antennae_R;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Insect", meta = (AllowPrivateAccess = "true"))
-	UStaticMeshComponent* SM_Front_Femur_L;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Insect", meta = (AllowPrivateAccess = "true"))
-	UStaticMeshComponent* SM_Front_Tibia_L;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Insect", meta = (AllowPrivateAccess = "true"))
-	UStaticMeshComponent* SM_Front_Tarsus_L;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Insect", meta = (AllowPrivateAccess = "true"))
-	UStaticMeshComponent* SM_Front_Femur_R;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Insect", meta = (AllowPrivateAccess = "true"))
-	UStaticMeshComponent* SM_Front_Tibia_R;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Insect", meta = (AllowPrivateAccess = "true"))
-	UStaticMeshComponent* SM_Front_Tarsus_R;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Insect", meta = (AllowPrivateAccess = "true"))
-	UStaticMeshComponent* SM_Mid_Femur_L;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Insect", meta = (AllowPrivateAccess = "true"))
-	UStaticMeshComponent* SM_Mid_Tibia_L;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Insect", meta = (AllowPrivateAccess = "true"))
-	UStaticMeshComponent* SM_Mid_Tarsus_L;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Insect", meta = (AllowPrivateAccess = "true"))
-	UStaticMeshComponent* SM_Mid_Femur_R;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Insect", meta = (AllowPrivateAccess = "true"))
-	UStaticMeshComponent* SM_Mid_Tibia_R;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Insect", meta = (AllowPrivateAccess = "true"))
-	UStaticMeshComponent* SM_Mid_Tarsus_R;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Insect", meta = (AllowPrivateAccess = "true"))
-	UStaticMeshComponent* SM_Back_Femur_L;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Insect", meta = (AllowPrivateAccess = "true"))
-	UStaticMeshComponent* SM_Back_Tibia_L;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Insect", meta = (AllowPrivateAccess = "true"))
-	UStaticMeshComponent* SM_Back_Tarsus_L;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Insect", meta = (AllowPrivateAccess = "true"))
-	UStaticMeshComponent* SM_Back_Femur_R;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Insect", meta = (AllowPrivateAccess = "true"))
-	UStaticMeshComponent* SM_Back_Tibia_R;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Insect", meta = (AllowPrivateAccess = "true"))
-	UStaticMeshComponent* SM_Back_Tarsus_R;
-
-
-	TArray<UStaticMeshComponent*> MeshMembers = {
-		SM_Abdomen , SM_Thorax, SM_Head, SM_Antennae_L, SM_Antennae_R,
-		SM_Front_Femur_L, SM_Front_Femur_R, SM_Front_Tarsus_L, SM_Front_Tarsus_R, SM_Front_Tibia_L, SM_Front_Tibia_R,
-		SM_Mid_Femur_L, SM_Mid_Femur_R, SM_Mid_Tarsus_L, SM_Mid_Tarsus_R, SM_Mid_Tibia_L, SM_Mid_Tibia_R,
-		SM_Back_Femur_L, SM_Back_Femur_R, SM_Back_Tarsus_L, SM_Back_Tarsus_R, SM_Back_Tibia_L, SM_Back_Tibia_R,
-	};
-
-	TArray<UStaticMeshComponent*> MeshFemurs = {
-		SM_Front_Femur_L, SM_Front_Femur_R,
-		SM_Mid_Femur_L, SM_Mid_Femur_R,
-		SM_Back_Femur_L, SM_Back_Femur_R,
-	};
-
-	TArray<UStaticMeshComponent*> MeshTibias = {
-		SM_Front_Tibia_L, SM_Front_Tibia_R,
-		SM_Mid_Tibia_L, SM_Mid_Tibia_R,
-		SM_Back_Tibia_L, SM_Back_Tibia_R,
-	};
-
-	TArray<UStaticMeshComponent*> MeshTarsus = {
-		SM_Front_Tarsus_L, SM_Front_Tarsus_R,
-		SM_Mid_Tarsus_L, SM_Mid_Tarsus_R,
-		SM_Back_Tarsus_L, SM_Back_Tarsus_R,
-	};
-
+	UPROPERTY(EditAnywhere)
+	TObjectPtr <UStaticMeshComponent> SM_Thorax;
 	// END of STATIC MESH MEMBERS
+
 
 	UFUNCTION()
 	void InitMesh();
 
 	UFUNCTION()
-	void InitMembers(UControlRigComponent* CRComponent);
-
-	UFUNCTION()
 	void OffsetMembers(UControlRigComponent* CRComponent);
-
-	void ResetMembers();
 
 	UFUNCTION()
 	void AttachMembers(UControlRigComponent* CRComponent);
 
-
-protected:
-
-	virtual void BeginPlay() override;
+	UFUNCTION()
+	void SkinMesh(UControlRigComponent* CRComponent);
 
 
-public:	
-
-	virtual void Tick(float DeltaTime) override;
-
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-	virtual void OnConstruction(const FTransform& Transform) override;
+	void OnConstruction(const FTransform& Transform) override;
 };
