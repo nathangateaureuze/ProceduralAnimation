@@ -11,22 +11,24 @@ AInsectCharacter::AInsectCharacter(const FObjectInitializer& ObjectInitializer)
 {
 	PrimaryActorTick.bCanEverTick = true;
 
+	GetCapsuleComponent()->SetCapsuleSize(34, 34, false);
+
 	ControlRig = CreateDefaultSubobject<UControlRigComponent>(TEXT("Insect_ControlRig"));
 	if (ControlRig)
 	{
-		ControlRig->SetupAttachment(GetMesh());
+		ControlRig->SetupAttachment(GetCapsuleComponent());
 	}
 
 	SM_Abdomen = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Insect_Mesh_Abdomen"));
 	if (SM_Abdomen)
 	{
-		SM_Abdomen->SetupAttachment(GetMesh());
+		SM_Abdomen->SetupAttachment(GetCapsuleComponent());
 	}
 
 	SM_Thorax = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Insect_Mesh_Thorax"));
 	if (SM_Thorax)
 	{
-		SM_Thorax->SetupAttachment(GetMesh());
+		SM_Thorax->SetupAttachment(GetCapsuleComponent());
 	}
 
 }
@@ -35,8 +37,16 @@ void AInsectCharacter::InitMesh()
 {
 	UE_LOG(LogTemp, Warning, TEXT("InitMesh"));
 
-	SM_Abdomen->SetStaticMesh(Abdomen->Mesh);
-	SM_Thorax->SetStaticMesh(Thorax->Mesh);
+	if (Abdomen && Thorax && Head && Antennae && Leg &&
+		SM_Abdomen && SM_Thorax)
+	{
+		SM_Abdomen->SetStaticMesh(Abdomen->Mesh);
+		SM_Thorax->SetStaticMesh(Thorax->Mesh);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("InitMesh"));
+	}
 }
 
 
@@ -44,41 +54,41 @@ void AInsectCharacter::OffsetMembers(UControlRigComponent* CRComponent)
 {
 	UE_LOG(LogTemp, Warning, TEXT("OffsetMembers"));
 
-	CRComponent->SetInitialBoneTransform(FName("Abdomen"), Abdomen->Transform, EControlRigComponentSpace::LocalSpace, true);
-	CRComponent->SetInitialBoneTransform(FName("Thorax"), Abdomen->ThoraxSocket, EControlRigComponentSpace::LocalSpace, true);
+	if (CRComponent && Thorax && Head && Antennae && Leg &&
+		ControlRig && SM_Abdomen && SM_Thorax)
+	{
+		CRComponent->SetInitialBoneTransform(FName("Abdomen"), Abdomen->Transform, EControlRigComponentSpace::LocalSpace, true);
+
+		CRComponent->SetInitialBoneTransform(FName("Thorax"), Abdomen->ThoraxSocket, EControlRigComponentSpace::LocalSpace, true);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("OffsetMembers"));
+	}
+
 }
 
-void AInsectCharacter::AttachMembers(UControlRigComponent* CRComponent)
+void AInsectCharacter::PostRegisterAllComponents()
 {
-	UE_LOG(LogTemp, Warning, TEXT("AttachMembers"));
+	Super::PostRegisterAllComponents();
 
-	SM_Abdomen->AttachToComponent(GetMesh(), ATTACHMENTRULES, "Abdomen");
-	SM_Thorax->AttachToComponent(GetMesh(), ATTACHMENTRULES, "Thorax");
-}
+	InitMesh();
 
-void AInsectCharacter::SkinMesh(UControlRigComponent* CRComponent)
-{
-	CRComponent->AddMappedCompleteSkeletalMesh(GetMesh());
+	ControlRig->OnPreConstructionDelegate.AddUniqueDynamic(this, &AInsectCharacter::OffsetMembers);
 }
 
 void AInsectCharacter::OnConstruction(const FTransform& Transform)
 {
 	Super::OnConstruction(Transform);
 
-	UE_LOG(LogTemp, Warning, TEXT("OnConstruction"));
+	FControlRigComponentMappedComponent MappedAbdomenInfo = FControlRigComponentMappedComponent();
+	MappedAbdomenInfo.Component = SM_Abdomen;
+	MappedAbdomenInfo.ElementName = TEXT("Abdomen");
 
-	if (Abdomen && Thorax && Head && Antennae && Leg && 
-		ControlRig && SM_Abdomen && SM_Thorax)
-	{
-		InitMesh();
+	FControlRigComponentMappedComponent MappedThoraxInfo = FControlRigComponentMappedComponent();
+	MappedThoraxInfo.Component = SM_Thorax;
+	MappedThoraxInfo.ElementName = TEXT("Thorax");
 
-		ControlRig->OnPreConstructionDelegate.AddUniqueDynamic(this, &AInsectCharacter::OffsetMembers);
-		ControlRig->OnPreConstructionDelegate.AddUniqueDynamic(this, &AInsectCharacter::AttachMembers);
-		ControlRig->OnPreInitializeDelegate.AddUniqueDynamic(this, &AInsectCharacter::SkinMesh);
-	}
-	else
-	{
-		UE_LOG(LogTemp, Error, TEXT("Unable to retreive members assets"));
-	}
+	ControlRig->AddMappedComponents(TArray<FControlRigComponentMappedComponent>{MappedAbdomenInfo, MappedThoraxInfo});
 }
 

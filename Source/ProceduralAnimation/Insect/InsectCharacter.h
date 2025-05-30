@@ -27,7 +27,7 @@ public:
 
 	AInsectCharacter(const FObjectInitializer& ObjectInitializer);
 
-	UPROPERTY(Instanced, EditAnywhere, Category = "Insect")
+	UPROPERTY(EditAnywhere, Category = "Insect")
 	TObjectPtr<UControlRigComponent> ControlRig;
 
 	/*	------
@@ -68,12 +68,8 @@ public:
 	UFUNCTION()
 	void OffsetMembers(UControlRigComponent* CRComponent);
 
-	UFUNCTION()
-	void AttachMembers(UControlRigComponent* CRComponent);
 
-	UFUNCTION()
-	void SkinMesh(UControlRigComponent* CRComponent);
-
+	void PostRegisterAllComponents() override;
 
 	void OnConstruction(const FTransform& Transform) override;
-};
+ };
