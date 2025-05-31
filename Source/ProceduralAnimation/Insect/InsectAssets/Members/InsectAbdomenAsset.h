@@ -23,9 +23,6 @@ public:
 	FTransform ThoraxSocket;
 
 	UPROPERTY(EditAnywhere)
-	FTransform FrontLegSocket;
-
-	UPROPERTY(EditAnywhere)
 	FTransform MidLegSocket;
 
 	UPROPERTY(EditAnywhere)

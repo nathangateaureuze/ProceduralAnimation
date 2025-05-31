@@ -18,4 +18,7 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	FTransform HeadSocket;
+
+	UPROPERTY(EditAnywhere)
+	FTransform FrontLegSocket;
 };

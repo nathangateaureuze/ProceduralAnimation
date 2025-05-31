@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 
-#include "ControlRig.h"
 #include "ControlRigComponent.h"
 
 #include "InsectAssets/InsectColorAsset.h"
@@ -30,13 +29,76 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Insect")
 	TObjectPtr<UControlRigComponent> ControlRig;
 
+
+	/*	-------------------
+	*	STATIC MESH MEMBERS
+	*	-------------------	*/
+
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr <UStaticMeshComponent> SM_Abdomen;
+
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr <UStaticMeshComponent> SM_Thorax;
+
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr <UStaticMeshComponent> SM_Head;
+
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr <UStaticMeshComponent> SM_Antennae_L;
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr <UStaticMeshComponent> SM_Antennae_R;
+
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr <UStaticMeshComponent> SM_Front_Femur_L;
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr <UStaticMeshComponent> SM_Front_Tibia_L;
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr <UStaticMeshComponent> SM_Front_Tarsus_L;
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr <UStaticMeshComponent> SM_Front_Femur_R;
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr <UStaticMeshComponent> SM_Front_Tibia_R;
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr <UStaticMeshComponent> SM_Front_Tarsus_R;
+
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr <UStaticMeshComponent> SM_Mid_Femur_L;
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr <UStaticMeshComponent> SM_Mid_Tibia_L;
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr <UStaticMeshComponent> SM_Mid_Tarsus_L;
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr <UStaticMeshComponent> SM_Mid_Femur_R;
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr <UStaticMeshComponent> SM_Mid_Tibia_R;
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr <UStaticMeshComponent> SM_Mid_Tarsus_R;
+
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr <UStaticMeshComponent> SM_Back_Femur_L;
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr <UStaticMeshComponent> SM_Back_Tibia_L;
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr <UStaticMeshComponent> SM_Back_Tarsus_L;
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr <UStaticMeshComponent> SM_Back_Femur_R;
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr <UStaticMeshComponent> SM_Back_Tibia_R;
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr <UStaticMeshComponent> SM_Back_Tarsus_R;
+	// END of STATIC MESH MEMBERS
+
+private:
+
 	/*	------
 	*	ASSETS
 	*	------	*/
+
 	UPROPERTY(EditAnywhere, Category = "Insect|Asset|Color")
 	TObjectPtr<UInsectColorAsset> Color1;
 	UPROPERTY(EditAnywhere, Category = "Insect|Asset|Color")
 	TObjectPtr<UInsectColorAsset> Color2;
+
 
 	UPROPERTY(EditAnywhere, Category = "Insect|Asset|Member")
 	TObjectPtr<UInsectAbdomenAsset> Abdomen;
@@ -51,25 +113,15 @@ public:
 	// END of ASSETS
 
 
-	/*	-------------------
-	*	STATIC MESH MEMBERS
-	*	-------------------	*/
-	UPROPERTY(EditAnywhere)
-	TObjectPtr <UStaticMeshComponent> SM_Abdomen;
-
-	UPROPERTY(EditAnywhere)
-	TObjectPtr <UStaticMeshComponent> SM_Thorax;
-	// END of STATIC MESH MEMBERS
-
-
 	UFUNCTION()
-	void InitMesh();
+	const void InitAllStaticMesh();
 
 	UFUNCTION()
 	void OffsetMembers(UControlRigComponent* CRComponent);
 
+	UFUNCTION()
+	const void MapAllMemberComponent();
+
 
 	void PostRegisterAllComponents() override;
-
-	void OnConstruction(const FTransform& Transform) override;
  };
