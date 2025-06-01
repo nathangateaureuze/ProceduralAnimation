@@ -18,56 +18,59 @@ AInsectCharacter::AInsectCharacter(const FObjectInitializer& ObjectInitializer)
 	*	STATIC MESH MEMBERS
 	*	-------------------	*/
 
+	MeshMembers = CreateDefaultSubobject<USceneComponent>(TEXT("Insect_Mesh_Members"));
+	MeshMembers->SetupAttachment(GetCapsuleComponent());
+
 	SM_Abdomen = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Insect_Mesh_Abdomen"));
-	SM_Abdomen->SetupAttachment(GetCapsuleComponent());
+	SM_Abdomen->SetupAttachment(MeshMembers);
 	SM_Thorax = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Insect_Mesh_Thorax"));
-	SM_Thorax->SetupAttachment(GetCapsuleComponent());
+	SM_Thorax->SetupAttachment(MeshMembers);
 	SM_Head = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("InsectMesh_Head"));
-	SM_Head->SetupAttachment(GetCapsuleComponent());
+	SM_Head->SetupAttachment(MeshMembers);
 
 	SM_Antennae_L = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("InsectMesh_Antennae_L"));
-	SM_Antennae_L->SetupAttachment(GetCapsuleComponent());
+	SM_Antennae_L->SetupAttachment(MeshMembers);
 	SM_Antennae_R = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("InsectMesh_Antennae_R"));
-	SM_Antennae_R->SetupAttachment(GetCapsuleComponent());
+	SM_Antennae_R->SetupAttachment(MeshMembers);
 
 	SM_Front_Femur_L = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("InsectMesh_Front_Femur_L"));
-	SM_Front_Femur_L->SetupAttachment(GetCapsuleComponent());
+	SM_Front_Femur_L->SetupAttachment(MeshMembers);
 	SM_Front_Tibia_L = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("InsectMesh_Front_Tibia_L"));
-	SM_Front_Tibia_L->SetupAttachment(GetCapsuleComponent());
+	SM_Front_Tibia_L->SetupAttachment(MeshMembers);
 	SM_Front_Tarsus_L = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("InsectMesh_Front_Tarsus_L"));
-	SM_Front_Tarsus_L->SetupAttachment(GetCapsuleComponent());
+	SM_Front_Tarsus_L->SetupAttachment(MeshMembers);
 	SM_Front_Femur_R = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("InsectMesh_Front_Femur_R"));
-	SM_Front_Femur_R->SetupAttachment(GetCapsuleComponent());
+	SM_Front_Femur_R->SetupAttachment(MeshMembers);
 	SM_Front_Tibia_R = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("InsectMesh_Front_Tibia_R"));
-	SM_Front_Tibia_R->SetupAttachment(GetCapsuleComponent());
+	SM_Front_Tibia_R->SetupAttachment(MeshMembers);
 	SM_Front_Tarsus_R = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("InsectMesh_Front_Tarsus_R"));
-	SM_Front_Tarsus_R->SetupAttachment(GetCapsuleComponent());
+	SM_Front_Tarsus_R->SetupAttachment(MeshMembers);
 
 	SM_Mid_Femur_L = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("InsectMesh_Mid_Femur_L"));
-	SM_Mid_Femur_L->SetupAttachment(GetCapsuleComponent());
+	SM_Mid_Femur_L->SetupAttachment(MeshMembers);
 	SM_Mid_Tibia_L = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("InsectMesh_Mid_Tibia_L"));
-	SM_Mid_Tibia_L->SetupAttachment(GetCapsuleComponent());
+	SM_Mid_Tibia_L->SetupAttachment(MeshMembers);
 	SM_Mid_Tarsus_L = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("InsectMesh_Mid_Tarsus_L"));
-	SM_Mid_Tarsus_L->SetupAttachment(GetCapsuleComponent());
+	SM_Mid_Tarsus_L->SetupAttachment(MeshMembers);
 	SM_Mid_Femur_R = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("InsectMesh_Mid_Femur_R"));
-	SM_Mid_Femur_R->SetupAttachment(GetCapsuleComponent());
+	SM_Mid_Femur_R->SetupAttachment(MeshMembers);
 	SM_Mid_Tibia_R = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("InsectMesh_Mid_Tibia_R"));
-	SM_Mid_Tibia_R->SetupAttachment(GetCapsuleComponent());
+	SM_Mid_Tibia_R->SetupAttachment(MeshMembers);
 	SM_Mid_Tarsus_R = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("InsectMesh_Mid_Tarsus_R"));
-	SM_Mid_Tarsus_R->SetupAttachment(GetCapsuleComponent());
+	SM_Mid_Tarsus_R->SetupAttachment(MeshMembers);
 
 	SM_Back_Femur_L = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("InsectMesh_Back_Femur_L"));
-	SM_Back_Femur_L->SetupAttachment(GetCapsuleComponent());
+	SM_Back_Femur_L->SetupAttachment(MeshMembers);
 	SM_Back_Tibia_L = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("InsectMesh_Back_Tibia_L"));
-	SM_Back_Tibia_L->SetupAttachment(GetCapsuleComponent());
+	SM_Back_Tibia_L->SetupAttachment(MeshMembers);
 	SM_Back_Tarsus_L = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("InsectMesh_Back_Tarsus_L"));
-	SM_Back_Tarsus_L->SetupAttachment(GetCapsuleComponent());
+	SM_Back_Tarsus_L->SetupAttachment(MeshMembers);
 	SM_Back_Femur_R = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("InsectMesh_Back_Femur_R"));
-	SM_Back_Femur_R->SetupAttachment(GetCapsuleComponent());
+	SM_Back_Femur_R->SetupAttachment(MeshMembers);
 	SM_Back_Tibia_R = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("InsectMesh_Back_Tibia_R"));
-	SM_Back_Tibia_R->SetupAttachment(GetCapsuleComponent());
+	SM_Back_Tibia_R->SetupAttachment(MeshMembers);
 	SM_Back_Tarsus_R = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("InsectMesh_Back_Tarsus_R"));
-	SM_Back_Tarsus_R->SetupAttachment(GetCapsuleComponent());
+	SM_Back_Tarsus_R->SetupAttachment(MeshMembers);
 	// END of STATIC MESH MEMBERS
 
 }
@@ -164,6 +167,7 @@ void AInsectCharacter::OffsetMembers(UControlRigComponent* CRComponent)
 const void AInsectCharacter::MapAllMemberComponent()
 {
 	TArray<FControlRigComponentMappedComponent> MappedComponents = {};
+	
 
 	FControlRigComponentMappedComponent MappedComponentInfo = FControlRigComponentMappedComponent();
 
@@ -281,6 +285,8 @@ void AInsectCharacter::PostRegisterAllComponents()
 	}
 	else
 	{
+		ControlRig->OnPreConstructionDelegate.Clear();
+
 		UE_LOG(LogTemp, Error, TEXT("Invalid Assets"));
 	}
 

@@ -34,57 +34,37 @@ public:
 	*	STATIC MESH MEMBERS
 	*	-------------------	*/
 
-	UPROPERTY(VisibleAnywhere)
+	TObjectPtr <USceneComponent> MeshMembers;
+	
 	TObjectPtr <UStaticMeshComponent> SM_Abdomen;
-
-	UPROPERTY(VisibleAnywhere)
+	
 	TObjectPtr <UStaticMeshComponent> SM_Thorax;
-
-	UPROPERTY(VisibleAnywhere)
+	
 	TObjectPtr <UStaticMeshComponent> SM_Head;
-
-	UPROPERTY(VisibleAnywhere)
-	TObjectPtr <UStaticMeshComponent> SM_Antennae_L;
-	UPROPERTY(VisibleAnywhere)
+	
+	TObjectPtr <UStaticMeshComponent> SM_Antennae_L;	
 	TObjectPtr <UStaticMeshComponent> SM_Antennae_R;
-
-	UPROPERTY(VisibleAnywhere)
-	TObjectPtr <UStaticMeshComponent> SM_Front_Femur_L;
-	UPROPERTY(VisibleAnywhere)
-	TObjectPtr <UStaticMeshComponent> SM_Front_Tibia_L;
-	UPROPERTY(VisibleAnywhere)
+	
+	TObjectPtr <UStaticMeshComponent> SM_Front_Femur_L;	
+	TObjectPtr <UStaticMeshComponent> SM_Front_Tibia_L;	
 	TObjectPtr <UStaticMeshComponent> SM_Front_Tarsus_L;
-	UPROPERTY(VisibleAnywhere)
-	TObjectPtr <UStaticMeshComponent> SM_Front_Femur_R;
-	UPROPERTY(VisibleAnywhere)
-	TObjectPtr <UStaticMeshComponent> SM_Front_Tibia_R;
-	UPROPERTY(VisibleAnywhere)
+	TObjectPtr <UStaticMeshComponent> SM_Front_Femur_R;	
+	TObjectPtr <UStaticMeshComponent> SM_Front_Tibia_R;	
 	TObjectPtr <UStaticMeshComponent> SM_Front_Tarsus_R;
-
-	UPROPERTY(VisibleAnywhere)
+	
 	TObjectPtr <UStaticMeshComponent> SM_Mid_Femur_L;
-	UPROPERTY(VisibleAnywhere)
-	TObjectPtr <UStaticMeshComponent> SM_Mid_Tibia_L;
-	UPROPERTY(VisibleAnywhere)
-	TObjectPtr <UStaticMeshComponent> SM_Mid_Tarsus_L;
-	UPROPERTY(VisibleAnywhere)
-	TObjectPtr <UStaticMeshComponent> SM_Mid_Femur_R;
-	UPROPERTY(VisibleAnywhere)
-	TObjectPtr <UStaticMeshComponent> SM_Mid_Tibia_R;
-	UPROPERTY(VisibleAnywhere)
+	TObjectPtr <UStaticMeshComponent> SM_Mid_Tibia_L;	
+	TObjectPtr <UStaticMeshComponent> SM_Mid_Tarsus_L;	
+	TObjectPtr <UStaticMeshComponent> SM_Mid_Femur_R;	
+	TObjectPtr <UStaticMeshComponent> SM_Mid_Tibia_R;	
 	TObjectPtr <UStaticMeshComponent> SM_Mid_Tarsus_R;
-
-	UPROPERTY(VisibleAnywhere)
-	TObjectPtr <UStaticMeshComponent> SM_Back_Femur_L;
-	UPROPERTY(VisibleAnywhere)
-	TObjectPtr <UStaticMeshComponent> SM_Back_Tibia_L;
-	UPROPERTY(VisibleAnywhere)
-	TObjectPtr <UStaticMeshComponent> SM_Back_Tarsus_L;
-	UPROPERTY(VisibleAnywhere)
-	TObjectPtr <UStaticMeshComponent> SM_Back_Femur_R;
-	UPROPERTY(VisibleAnywhere)
+	
+	TObjectPtr <UStaticMeshComponent> SM_Back_Femur_L;	
+	TObjectPtr <UStaticMeshComponent> SM_Back_Tibia_L;	
+	TObjectPtr <UStaticMeshComponent> SM_Back_Tarsus_L;	
+	TObjectPtr <UStaticMeshComponent> SM_Back_Femur_R;	
 	TObjectPtr <UStaticMeshComponent> SM_Back_Tibia_R;
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(EditAnywhere)
 	TObjectPtr <UStaticMeshComponent> SM_Back_Tarsus_R;
 	// END of STATIC MESH MEMBERS
 
