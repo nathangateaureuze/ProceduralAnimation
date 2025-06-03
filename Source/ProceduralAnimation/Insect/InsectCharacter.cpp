@@ -110,6 +110,17 @@ const void AInsectCharacter::InitAllStaticMesh()
 	return;
 }
 
+const void AInsectCharacter::InitColor()
+{
+	FVector ColorVector1 = FVector(Color1->Color.R, Color1->Color.G, Color1->Color.B);
+	FVector ColorVector2 = FVector(Color2->Color.R, Color2->Color.G, Color2->Color.B);
+
+	SM_Abdomen->SetVectorParameterValueOnMaterials(FName("Color1"), ColorVector1);
+	SM_Abdomen->SetVectorParameterValueOnMaterials(FName("Color2"), ColorVector2);
+
+	return;
+}
+
 static const FTransform MirrorTransform(FTransform Transform) {
 	FVector Location = Transform.GetLocation();
 	Location.X = Location.X * (-1);
@@ -278,6 +289,8 @@ void AInsectCharacter::PostRegisterAllComponents()
 	if (Abdomen && Thorax && Head && Antennae && Leg)
 	{
 		InitAllStaticMesh();
+
+		InitColor();
 
 		ControlRig->OnPreConstructionDelegate.AddUniqueDynamic(this, &AInsectCharacter::OffsetMembers);
 

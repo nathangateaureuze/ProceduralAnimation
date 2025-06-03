@@ -97,6 +97,9 @@ private:
 	const void InitAllStaticMesh();
 
 	UFUNCTION()
+	const void InitColor();
+
+	UFUNCTION()
 	void OffsetMembers(UControlRigComponent* CRComponent);
 
 	UFUNCTION()
