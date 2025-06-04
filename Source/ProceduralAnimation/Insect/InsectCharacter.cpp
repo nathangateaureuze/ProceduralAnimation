@@ -2,14 +2,14 @@
 
 #include "InsectCharacter.h"
 #include "Components/CapsuleComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
+#include "Kismet/KismetMathLibrary.h"
 
 
 AInsectCharacter::AInsectCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer.DoNotCreateDefaultSubobject(ACharacter::MeshComponentName))
 {
 	PrimaryActorTick.bCanEverTick = true;
-
-	GetCapsuleComponent()->SetCapsuleSize(34, 34, false);
 
 	ControlRig = CreateDefaultSubobject<UControlRigComponent>(TEXT("Insect_ControlRig"));
 	ControlRig->SetupAttachment(GetCapsuleComponent());
@@ -73,6 +73,22 @@ AInsectCharacter::AInsectCharacter(const FObjectInitializer& ObjectInitializer)
 	SM_Back_Tarsus_R->SetupAttachment(MeshMembers);
 	// END of STATIC MESH MEMBERS
 
+}
+
+const void AInsectCharacter::SetHeight()
+{
+	float height = Leg->TarsusSocket.GetLocation().Z;
+	height += Leg->TibiaSocket.GetLocation().Z;
+	height += Abdomen->MidLegSocket.GetLocation().Z;
+
+	ControlRig->SetRelativeLocation(FVector(0,0, height));
+
+	height *= -1;
+
+	GetCapsuleComponent()->SetCapsuleSize(height, height, false);
+
+
+	return;
 }
 
 const void AInsectCharacter::InitAllStaticMesh()
@@ -144,7 +160,15 @@ void AInsectCharacter::OffsetMembers(UControlRigComponent* CRComponent)
 {
 	UE_LOG(LogTemp, Warning, TEXT("OffsetMembers"));
 
-	CRComponent->SetInitialBoneTransform(FName("Abdomen"), Abdomen->Transform, EControlRigComponentSpace::LocalSpace, false);
+	float height = Leg->TarsusSocket.GetLocation().Z;
+	height += Leg->TibiaSocket.GetLocation().Z;
+	height += Abdomen->MidLegSocket.GetLocation().Z;
+	height *= -1;
+
+	FTransform AbdomenTransform = FTransform::Identity;
+	AbdomenTransform.SetLocation(FVector(0, 0, height));
+
+	CRComponent->SetInitialBoneTransform(FName("Abdomen"), AbdomenTransform, EControlRigComponentSpace::LocalSpace, false);
 	CRComponent->SetInitialBoneTransform(FName("Thorax"), Abdomen->ThoraxSocket, EControlRigComponentSpace::LocalSpace, false);
 	CRComponent->SetInitialBoneTransform(FName("Head"), Thorax->HeadSocket, EControlRigComponentSpace::LocalSpace, false);
 
@@ -282,12 +306,41 @@ const void AInsectCharacter::MapAllMemberComponent()
 	return;
 }
 
+void AInsectCharacter::OrientToFloor(UControlRigComponent* CRComponent)
+{
+	FFindFloorResult Floor = GetCharacterMovement()->CurrentFloor;
+
+	if (Floor.bBlockingHit)
+	{
+
+		FRotator TargetRotation;
+		TargetRotation.Yaw = 90;
+
+		float ActorInverseYaw = GetActorRotation().Yaw * (-1);
+
+		FVector2D TopNormal = FVector2D(Floor.HitResult.Normal.X, Floor.HitResult.Normal.Y);
+
+		TopNormal = UKismetMathLibrary::GetRotated2D(TopNormal, ActorInverseYaw);
+		
+		TargetRotation.Pitch = FMath::RadiansToDegrees(FMath::Asin(TopNormal.Y)) * (-1);
+		TargetRotation.Roll = FMath::RadiansToDegrees(FMath::Asin(TopNormal.X)) * (-1);
+
+		UE_LOG(LogTemp, Warning, TEXT("%f"), TargetRotation.Pitch);
+
+		CRComponent->SetRelativeRotation(UKismetMathLibrary::RLerp(CRComponent->GetRelativeRotation(), TargetRotation, 0.1 ,true));
+	}
+
+	return;
+}
+
 void AInsectCharacter::PostRegisterAllComponents()
 {
 	Super::PostRegisterAllComponents();
 
 	if (Abdomen && Thorax && Head && Antennae && Leg)
 	{
+		SetHeight();
+
 		InitAllStaticMesh();
 
 		InitColor();
@@ -295,6 +348,11 @@ void AInsectCharacter::PostRegisterAllComponents()
 		ControlRig->OnPreConstructionDelegate.AddUniqueDynamic(this, &AInsectCharacter::OffsetMembers);
 
 		MapAllMemberComponent();
+
+		if (bOrientToFloor)
+		{
+			ControlRig->OnPreForwardsSolveDelegate.AddUniqueDynamic(this, &AInsectCharacter::OrientToFloor);
+		}
 	}
 	else
 	{

@@ -29,6 +29,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Insect")
 	TObjectPtr<UControlRigComponent> ControlRig;
 
+	UPROPERTY(EditAnywhere, Category = "Insect")
+	bool bOrientToFloor = true;
+
 
 	/*	-------------------
 	*	STATIC MESH MEMBERS
@@ -64,7 +67,6 @@ public:
 	TObjectPtr <UStaticMeshComponent> SM_Back_Tarsus_L;	
 	TObjectPtr <UStaticMeshComponent> SM_Back_Femur_R;	
 	TObjectPtr <UStaticMeshComponent> SM_Back_Tibia_R;
-	UPROPERTY(EditAnywhere)
 	TObjectPtr <UStaticMeshComponent> SM_Back_Tarsus_R;
 	// END of STATIC MESH MEMBERS
 
@@ -94,6 +96,9 @@ private:
 
 
 	UFUNCTION()
+	const void SetHeight();
+
+	UFUNCTION()
 	const void InitAllStaticMesh();
 
 	UFUNCTION()
@@ -104,6 +109,10 @@ private:
 
 	UFUNCTION()
 	const void MapAllMemberComponent();
+
+
+	UFUNCTION()
+	void OrientToFloor(UControlRigComponent* CRComponent);
 
 
 	void PostRegisterAllComponents() override;
