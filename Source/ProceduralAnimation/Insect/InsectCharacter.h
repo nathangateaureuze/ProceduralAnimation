@@ -26,7 +26,7 @@ public:
 
 	AInsectCharacter(const FObjectInitializer& ObjectInitializer);
 
-	UPROPERTY(EditAnywhere, Category = "Insect")
+	UPROPERTY(EditAnywhere, Category = "Insect", BlueprintReadOnly)
 	TObjectPtr<UControlRigComponent> ControlRig;
 
 	UPROPERTY(EditAnywhere, Category = "Insect")
@@ -70,41 +70,41 @@ public:
 	TObjectPtr <UStaticMeshComponent> SM_Back_Tarsus_R;
 	// END of STATIC MESH MEMBERS
 
-private:
+public:
 
 	/*	------
 	*	ASSETS
 	*	------	*/
 
-	UPROPERTY(EditAnywhere, Category = "Insect|Asset|Color")
+	UPROPERTY(EditAnywhere, Category = "Insect|Asset|Color", BlueprintReadWrite)
 	TObjectPtr<UInsectColorAsset> Color1;
-	UPROPERTY(EditAnywhere, Category = "Insect|Asset|Color")
+	UPROPERTY(EditAnywhere, Category = "Insect|Asset|Color", BlueprintReadWrite)
 	TObjectPtr<UInsectColorAsset> Color2;
 
 
-	UPROPERTY(EditAnywhere, Category = "Insect|Asset|Member")
+	UPROPERTY(EditAnywhere, Category = "Insect|Asset|Member", BlueprintReadWrite)
 	TObjectPtr<UInsectAbdomenAsset> Abdomen;
-	UPROPERTY(EditAnywhere, Category = "Insect|Asset|Member")
+	UPROPERTY(EditAnywhere, Category = "Insect|Asset|Member", BlueprintReadWrite)
 	TObjectPtr<UInsectAntennaeAsset> Antennae;
-	UPROPERTY(EditAnywhere, Category = "Insect|Asset|Member")
+	UPROPERTY(EditAnywhere, Category = "Insect|Asset|Member", BlueprintReadWrite)
 	TObjectPtr<UInsectHeadAsset> Head;
-	UPROPERTY(EditAnywhere, Category = "Insect|Asset|Member")
+	UPROPERTY(EditAnywhere, Category = "Insect|Asset|Member", BlueprintReadWrite)
 	TObjectPtr<UInsectLegAsset> Leg;
-	UPROPERTY(EditAnywhere, Category = "Insect|Asset|Member")
+	UPROPERTY(EditAnywhere, Category = "Insect|Asset|Member", BlueprintReadWrite)
 	TObjectPtr<UInsectThoraxAsset> Thorax;
 	// END of ASSETS
-
+private:
 
 	UFUNCTION()
 	const void SetHeight();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	const void InitAllStaticMesh();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	const void InitColor();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void OffsetMembers(UControlRigComponent* CRComponent);
 
 	UFUNCTION()
